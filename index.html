@@ -80,41 +80,6 @@
             color: white;
             transform: translateY(-2px);
         }
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-}
-        /* Initial state */
-/* Initial state for nav-links */
-.nav-links {
-    opacity: 0;
-    visibility: hidden;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background: #fff;
-    transition: opacity 0.3s ease, visibility 0.3s ease, top 0.3s ease;
-}
-
-/* When active (showing) */
-.nav-links.active {
-    opacity: 1;
-    visibility: visible;
-    top: 50px; /* Adjust the position based on your layout */
-}
-
-/* Mobile Menu: Initially hidden, toggles when active */
-@media (max-width: 768px) {
-    .nav-links {
-        position: fixed;
-        top: 70px; /* Adjust top to make sure it aligns below the header */
-    }
-}
-
 
         /* Dropdown */
         .dropdown {
@@ -1100,42 +1065,66 @@
         </section>
     </main>
 
-<script>
-    function showSection(sectionId) {
-        // Hide all sections
-        const sections = document.querySelectorAll('.section');
-        sections.forEach(section => {
-            section.classList.remove('active');
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show the selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Smooth scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Wait for DOM to load
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelector('.nav-links');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            // Mobile menu toggle - only for mobile screens
+            mobileMenu.addEventListener('click', function(event) {
+                event.stopPropagation();
+                if (window.innerWidth <= 768) {
+                    navLinks.style.display = navLinks.style.display === 'block' ? 'none' : 'block';
+                }
+            });
+
+            // Close mobile menu when clicking outside - but only if we're in mobile view
+            document.addEventListener('click', function(event) {
+                // Only apply mobile menu logic on mobile screens
+                if (window.innerWidth <= 768) {
+                    // Check if click is outside nav area and mobile menu is visible
+                    if (!navLinks.contains(event.target) && 
+                        !mobileMenu.contains(event.target) && 
+                        navLinks.style.display === 'block') {
+                        navLinks.style.display = 'none';
+                    }
+                }
+            });
+
+            // Reset nav links display on window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    navLinks.style.display = '';
+                }
+            });
+
+            // Prevent double-click selection issues
+            document.addEventListener('selectstart', function(event) {
+                // Allow text selection in content areas
+                if (event.target.closest('.section')) {
+                    return true;
+                }
+                // Prevent selection on navigation and other UI elements
+                if (event.target.closest('nav') || event.target.closest('header')) {
+                    event.preventDefault();
+                }
+            });
         });
-
-        // Show the selected section
-        const selectedSection = document.getElementById(sectionId);
-        if (selectedSection) {
-            selectedSection.classList.add('active');
-        }
-
-        // Smooth scroll to top
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // Mobile menu toggle
-    document.querySelector('.mobile-menu').addEventListener('click', function() {
-        const navLinks = document.querySelector('.nav-links');
-        navLinks.classList.toggle('active'); // Toggle visibility using the 'active' class
-    });
-
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', function(event) {
-        const navLinks = document.querySelector('.nav-links');
-        const mobileMenu = document.querySelector('.mobile-menu');
-
-        // Close menu if clicked outside
-        if (!navLinks.contains(event.target) && !mobileMenu.contains(event.target)) {
-            navLinks.classList.remove('active'); // Remove the 'active' class to hide the menu
-        }
-    });
-</script>
-
-
+    </script>
 </body>
 </html>
