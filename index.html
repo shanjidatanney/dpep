@@ -87,6 +87,19 @@
   width: 100%;
   z-index: 1000;
 }
+        /* Initial state */
+.nav-links {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* When active (showing) */
+.nav-links.active {
+    opacity: 1;
+    visibility: visible;
+}
+
 
         /* Dropdown */
         .dropdown {
@@ -1072,36 +1085,41 @@
         </section>
     </main>
 
-    <script>
-        function showSection(sectionId) {
-            // Hide all sections
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            // Show the selected section
-            document.getElementById(sectionId).classList.add('active');
-            
-            // Smooth scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+<script>
+    function showSection(sectionId) {
+        // Hide all sections
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => {
+            section.classList.remove('active');
+        });
+
+        // Show the selected section
+        const selectedSection = document.getElementById(sectionId);
+        if (selectedSection) {
+            selectedSection.classList.add('active');
         }
 
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.style.display = navLinks.style.display === 'block' ? 'none' : 'block';
-        });
+        // Smooth scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const navLinks = document.querySelector('.nav-links');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            
-            if (!navLinks.contains(event.target) && !mobileMenu.contains(event.target)) {
-                navLinks.style.display = 'none';
-            }
-        });
-    </script>
+    // Mobile menu toggle
+    document.querySelector('.mobile-menu').addEventListener('click', function() {
+        const navLinks = document.querySelector('.nav-links');
+        navLinks.classList.toggle('active'); // Toggle visibility using the 'active' class
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const navLinks = document.querySelector('.nav-links');
+        const mobileMenu = document.querySelector('.mobile-menu');
+
+        // Close menu if clicked outside
+        if (!navLinks.contains(event.target) && !mobileMenu.contains(event.target)) {
+            navLinks.classList.remove('active'); // Remove the 'active' class to hide the menu
+        }
+    });
+</script>
+
 </body>
 </html>
