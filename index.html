@@ -142,16 +142,30 @@
         .dropdown-content a:last-child {
             border-bottom: none;
         }
+				.image-pair {
+			display: flex; /* Use flexbox for horizontal alignment */
+			justify-content: space-between; /* Space between the images */
+			gap: 1rem; /* Optional gap between the images */
+			margin: 2rem 0;
+		}
 
-        /* Image Styles */
-        .portfolio-image {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            margin: 1rem 0;
-            transition: transform 0.3s ease;
-        }
+		.image-pair .portfolio-image {
+			width: 48%; /* Adjust the width to fit two images side by side */
+			height: auto; /* Maintain aspect ratio */
+			border-radius: 8px;
+			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+			transition: transform 0.3s ease;
+		}
+		.portfolio-image {
+			width: 60%; /* Set the width of the image */
+			height: auto; /* Maintain aspect ratio */
+			border-radius: 8px;
+			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+			margin: 1rem auto; /* Automatically centers the image horizontally */
+			display: block; /* Ensures the image is treated as a block element */
+			transition: transform 0.3s ease;
+}
+
 
         .portfolio-image:hover {
             transform: scale(1.02);
@@ -159,30 +173,24 @@
 
         .profile-image {
             width: 100%;
-            max-width: 400px;
+            max-width: 500px;
             height: auto;
             border-radius: 8px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            margin: 2rem auto;
+            margin: 0 auto;
             display: block;
         }
 
-        .image-pair {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin: 2rem 0;
-        }
+       
+		/* Ensure the parent container of the image takes up the full width */
+		.image-single {
+			width: 100%;
+			display: flex;
+			justify-content: center; /* Centers the image horizontally */
+			align-items: center; /* Vertically centers if needed */
+			margin: 2rem 0;
+		}
 
-        .image-single {
-            text-align: center;
-            margin: 2rem 0;
-        }
-
-        .image-single .portfolio-image {
-            max-width: 600px;
-            margin: 0 auto;
-        }
 
         /* Mobile responsiveness for images */
         @media (max-width: 768px) {
@@ -193,6 +201,7 @@
 
             .profile-image {
                 max-width: 300px;
+				margin: 0 auto;
             }
         }
 
@@ -300,7 +309,15 @@
         .mobile-menu {
             display: none;
         }
+		@media (max-width: 768px) {
+			.image-pair {
+				flex-direction: column; /* Stack the images vertically on smaller screens */
+			}
 
+			.image-pair .portfolio-image {
+				width: 100%; /* Make images full width on smaller screens */
+			}
+		}
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -435,7 +452,6 @@
 
             <div class="image-pair">
                 <img src="images/pic1.jpg" alt="Centre Environment" class="portfolio-image">
-                <img src="images/pic2.jpg" alt="Learning Spaces" class="portfolio-image">
             </div>
 
             <h2>Centre Layout & Facilities</h2>
@@ -485,6 +501,9 @@
             </div>
 
             <h2>Outdoor Play Spaces</h2>
+			<div class="image-pair">
+                <img src="images/pic2.jpg" alt="Learning Spaces" class="portfolio-image">
+            </div>
             <div style="background: white; padding: 2rem; border-radius: 15px; margin: 2rem 0;">
                 <p>The outdoor play spaces are thoughtfully divided into two areas:</p>
                 <h3>Backyard</h3>
@@ -648,12 +667,11 @@
                 <p>Play-based learning was a central aspect of my practice, offering children opportunities to explore, experiment, and develop a wide range of cognitive, social, emotional, and physical skills within a safe and stimulating environment.</p>
             </div>
 
-            <div class="image-pair">
+            <h2>Practical Example</h2>
+			<div class="image-pair">
                 <img src="images/pic3.jpg" alt="Play-based Learning Activity" class="portfolio-image">
                 <img src="images/pic4.jpg" alt="Creative Learning Environment" class="portfolio-image">
             </div>
-
-            <h2>Practical Example</h2>
             <div style="background: white; padding: 2rem; border-radius: 15px; margin: 2rem 0;">
                 <p>On Day 6, I led an outdoor science-inspired activity where children created "snow" using salt and vinegar. This sensory-rich experience supported their natural curiosity and introduced them to early scientific concepts such as cause-and-effect and chemical reactions (Edwards, 2017). It also engaged their fine motor skills as they poured, mixed, and observed changes.</p>
                 
@@ -808,11 +826,10 @@
                 <p>My practice consistently aligned with national curriculum frameworks and quality standards to ensure that all learning experiences were meaningful, developmentally appropriate, and supported holistic child outcomes.</p>
             </div>
 
-            <div class="image-single">
+            <h2>Practical Example</h2>
+			<div class="image-single">
                 <img src="images/pic5.jpg" alt="Curriculum Framework Implementation" class="portfolio-image">
             </div>
-
-            <h2>Practical Example</h2>
             <div style="background: white; padding: 2rem; border-radius: 15px; margin: 2rem 0;">
                 <p>On Day 7, I participated in Pyjama Week, a themed activity where children drew and discussed their clothing. This activity not only encouraged self-expression but also supported emotional awareness, storytelling, and reflective thinking. Children shared stories about their favourite pyjamas, discussed colours and patterns, and related their clothing choices to personal experiences.</p>
                 
@@ -843,11 +860,10 @@
                 <p>Supporting children's holistic development, encompassing emotional, social, cognitive, and physical wellbeing, was a central focus of my placement. Emphasizing dispositions for learning such as resilience, cooperation, curiosity, and persistence helped foster confident, engaged, and capable learners.</p>
             </div>
 
-            <div class="image-single">
+            <h2>Practical Example</h2>
+			<div class="image-single">
                 <img src="images/pic6.jpg" alt="Holistic Development Activities" class="portfolio-image">
             </div>
-
-            <h2>Practical Example</h2>
             <div style="background: white; padding: 2rem; border-radius: 15px; margin: 2rem 0;">
                 <p>On Day 6, I assisted children with cutting paper using scissors during a creative arts activity. This task supported the development of fine motor skills, hand-eye coordination, and concentration, which are essential for later literacy and self-care abilities.</p>
                 
@@ -882,11 +898,10 @@
                 <p>Maintaining the safety and wellbeing of children was a top priority in all aspects of my placement. I consistently integrated health, safety, and hygiene practices into daily routines and learning experiences to create a secure and supportive environment where children could explore, learn, and develop with confidence.</p>
             </div>
 
-            <div class="image-single">
+            <h2>Practical Example</h2>
+			<div class="image-single">
                 <img src="images/pic7.jpg" alt="Safety and Wellbeing Practices" class="portfolio-image">
             </div>
-
-            <h2>Practical Example</h2>
             <div style="background: white; padding: 2rem; border-radius: 15px; margin: 2rem 0;">
                 <p>On Day 2, I supervised a clay activity during NAIDOC Week, ensuring children followed hygiene routines, including washing their hands before and after the activity. While engaging in the task, children explored textures, shapes, and patterns, which supported fine motor development and creativity. I also facilitated a drawing activity with the Aboriginal flag, linking cultural awareness with wellbeing by encouraging discussion about identity, respect, and community.</p>
                 
